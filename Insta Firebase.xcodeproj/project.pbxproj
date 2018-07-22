@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E1DE580B138DDA972AAFCDC /* Pods_Insta_Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5148552221486955550B9DF /* Pods_Insta_Firebase.framework */; };
 		BD09038A21038D5D009E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09038921038D5D009E66FA /* AppDelegate.swift */; };
 		BD09038C21038D5D009E66FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09038B21038D5D009E66FA /* ViewController.swift */; };
 		BD09038F21038D5D009E66FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD09038D21038D5D009E66FA /* Main.storyboard */; };
 		BD09039121038D5E009E66FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD09039021038D5E009E66FA /* Assets.xcassets */; };
 		BD09039421038D5E009E66FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD09039221038D5E009E66FA /* LaunchScreen.storyboard */; };
+		BD09039D21039FC5009E66FA /* Uitilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09039C21039FC5009E66FA /* Uitilities.swift */; };
+		BD09039F2103FE9A009E66FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD09039E2103FE9A009E66FA /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA6275F3EF567B7E50B231CE /* Pods-Insta Firebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insta Firebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Insta Firebase/Pods-Insta Firebase.debug.xcconfig"; sourceTree = "<group>"; };
 		BD09038621038D5D009E66FA /* Insta Firebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Insta Firebase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD09038921038D5D009E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD09038B21038D5D009E66FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,10 @@
 		BD09039021038D5E009E66FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD09039321038D5E009E66FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD09039521038D5E009E66FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD09039C21039FC5009E66FA /* Uitilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uitilities.swift; sourceTree = "<group>"; };
+		BD09039E2103FE9A009E66FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D5148552221486955550B9DF /* Pods_Insta_Firebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Insta_Firebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7A94659D2412D2D23DD607B /* Pods-Insta Firebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insta Firebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-Insta Firebase/Pods-Insta Firebase.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E1DE580B138DDA972AAFCDC /* Pods_Insta_Firebase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		434EF75BA662C280B0EDC75B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA6275F3EF567B7E50B231CE /* Pods-Insta Firebase.debug.xcconfig */,
+				E7A94659D2412D2D23DD607B /* Pods-Insta Firebase.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BD09037D21038D5D009E66FA = {
 			isa = PBXGroup;
 			children = (
 				BD09038821038D5D009E66FA /* Insta Firebase */,
 				BD09038721038D5D009E66FA /* Products */,
+				434EF75BA662C280B0EDC75B /* Pods */,
+				C27C24D3D0C2C3950C61AF49 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +74,32 @@
 		BD09038821038D5D009E66FA /* Insta Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				BD09039B21039FB3009E66FA /* New Group */,
 				BD09038921038D5D009E66FA /* AppDelegate.swift */,
 				BD09038B21038D5D009E66FA /* ViewController.swift */,
 				BD09038D21038D5D009E66FA /* Main.storyboard */,
 				BD09039021038D5E009E66FA /* Assets.xcassets */,
 				BD09039221038D5E009E66FA /* LaunchScreen.storyboard */,
 				BD09039521038D5E009E66FA /* Info.plist */,
+				BD09039E2103FE9A009E66FA /* GoogleService-Info.plist */,
 			);
 			path = "Insta Firebase";
+			sourceTree = "<group>";
+		};
+		BD09039B21039FB3009E66FA /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				BD09039C21039FC5009E66FA /* Uitilities.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		C27C24D3D0C2C3950C61AF49 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5148552221486955550B9DF /* Pods_Insta_Firebase.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +109,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BD09039821038D5E009E66FA /* Build configuration list for PBXNativeTarget "Insta Firebase" */;
 			buildPhases = (
+				3C008EB3CDD905674729D860 /* [CP] Check Pods Manifest.lock */,
 				BD09038221038D5D009E66FA /* Sources */,
 				BD09038321038D5D009E66FA /* Frameworks */,
 				BD09038421038D5D009E66FA /* Resources */,
+				60D618F9A4E2F9FAF24B1745 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -123,12 +163,58 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD09039421038D5E009E66FA /* LaunchScreen.storyboard in Resources */,
+				BD09039F2103FE9A009E66FA /* GoogleService-Info.plist in Resources */,
 				BD09039121038D5E009E66FA /* Assets.xcassets in Resources */,
 				BD09038F21038D5D009E66FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3C008EB3CDD905674729D860 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Insta Firebase-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60D618F9A4E2F9FAF24B1745 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Insta Firebase/Pods-Insta Firebase-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Insta Firebase/Pods-Insta Firebase-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BD09038221038D5D009E66FA /* Sources */ = {
@@ -137,6 +223,7 @@
 			files = (
 				BD09038C21038D5D009E66FA /* ViewController.swift in Sources */,
 				BD09038A21038D5D009E66FA /* AppDelegate.swift in Sources */,
+				BD09039D21039FC5009E66FA /* Uitilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +365,7 @@
 		};
 		BD09039921038D5E009E66FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA6275F3EF567B7E50B231CE /* Pods-Insta Firebase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,6 +384,7 @@
 		};
 		BD09039A21038D5E009E66FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7A94659D2412D2D23DD607B /* Pods-Insta Firebase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
