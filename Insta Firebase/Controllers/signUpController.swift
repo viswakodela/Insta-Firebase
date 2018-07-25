@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class signUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,6 +133,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return button
     }()
     
+    fileprivate func setUpTextFields(){
+        
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, userNameTextField, passwordTextField, signUpButton])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+                                     stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+                                     stackView.topAnchor.constraint(equalTo: plusPhotoButton.bottomAnchor, constant: 20),
+                                     stackView.heightAnchor.constraint(equalToConstant: 200)])
+    }
+    
     @objc func handleSignUp(){
         
         guard let email = emailTextField.text, email.count > 0 else{return}
@@ -178,25 +194,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             })
         }
     }
-    
-    fileprivate func setUpTextFields(){
-        
-        let stackView = UIStackView(arrangedSubviews: [emailTextField, userNameTextField, passwordTextField, signUpButton])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        
-        view.addSubview(stackView)
-        
-        NSLayoutConstraint.activate([stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-                                     stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
-                                     stackView.topAnchor.constraint(equalTo: plusPhotoButton.bottomAnchor, constant: 20),
-                                     stackView.heightAnchor.constraint(equalToConstant: 200)])
-    }
-    
-    
-    
     
 }
 

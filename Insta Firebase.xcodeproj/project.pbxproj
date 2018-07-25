@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E1DE580B138DDA972AAFCDC /* Pods_Insta_Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5148552221486955550B9DF /* Pods_Insta_Firebase.framework */; };
 		BD09038A21038D5D009E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09038921038D5D009E66FA /* AppDelegate.swift */; };
-		BD09038C21038D5D009E66FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09038B21038D5D009E66FA /* ViewController.swift */; };
+		BD09038C21038D5D009E66FA /* signUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09038B21038D5D009E66FA /* signUpController.swift */; };
 		BD09038F21038D5D009E66FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD09038D21038D5D009E66FA /* Main.storyboard */; };
 		BD09039121038D5E009E66FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD09039021038D5E009E66FA /* Assets.xcassets */; };
 		BD09039421038D5E009E66FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD09039221038D5E009E66FA /* LaunchScreen.storyboard */; };
@@ -25,7 +25,7 @@
 		BA6275F3EF567B7E50B231CE /* Pods-Insta Firebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insta Firebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Insta Firebase/Pods-Insta Firebase.debug.xcconfig"; sourceTree = "<group>"; };
 		BD09038621038D5D009E66FA /* Insta Firebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Insta Firebase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD09038921038D5D009E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BD09038B21038D5D009E66FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BD09038B21038D5D009E66FA /* signUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpController.swift; sourceTree = "<group>"; };
 		BD09038E21038D5D009E66FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD09039021038D5E009E66FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD09039321038D5E009E66FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		BDF6DED021066E31003B9B9F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BD09038B21038D5D009E66FA /* ViewController.swift */,
+				BD09038B21038D5D009E66FA /* signUpController.swift */,
 				BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */,
 			);
 			path = Controllers;
@@ -257,7 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD09038C21038D5D009E66FA /* ViewController.swift in Sources */,
+				BD09038C21038D5D009E66FA /* signUpController.swift in Sources */,
 				BDF6DED52107FAA1003B9B9F /* UserProfileHeaderCell.swift in Sources */,
 				BD09038A21038D5D009E66FA /* AppDelegate.swift in Sources */,
 				BDF6DECF21066DC8003B9B9F /* MainTabBarController.swift in Sources */,

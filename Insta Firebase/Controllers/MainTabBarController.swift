@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Auth.auth().currentUser == nil{
+//            present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+        }
         
         
         let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
