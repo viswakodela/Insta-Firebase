@@ -17,6 +17,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
         view.addSubview(plusPhotoButton)
         plusButtonConstraints()
         
