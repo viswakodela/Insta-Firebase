@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E1DE580B138DDA972AAFCDC /* Pods_Insta_Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5148552221486955550B9DF /* Pods_Insta_Firebase.framework */; };
 		BD09038A21038D5D009E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09038921038D5D009E66FA /* AppDelegate.swift */; };
-		BD09038C21038D5D009E66FA /* signUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09038B21038D5D009E66FA /* signUpController.swift */; };
+		BD09038C21038D5D009E66FA /* signUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09038B21038D5D009E66FA /* signUpViewController.swift */; };
 		BD09038F21038D5D009E66FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD09038D21038D5D009E66FA /* Main.storyboard */; };
 		BD09039121038D5E009E66FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD09039021038D5E009E66FA /* Assets.xcassets */; };
 		BD09039421038D5E009E66FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD09039221038D5E009E66FA /* LaunchScreen.storyboard */; };
@@ -19,13 +19,14 @@
 		BDF6DED22106725F003B9B9F /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DED12106725F003B9B9F /* UserProfileController.swift */; };
 		BDF6DED52107FAA1003B9B9F /* UserProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DED42107FAA1003B9B9F /* UserProfileHeaderCell.swift */; };
 		BDF6DED721080A3D003B9B9F /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DED621080A3D003B9B9F /* UserDetails.swift */; };
+		BDF6DEDB2108D830003B9B9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DEDA2108D830003B9B9F /* LoginController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BA6275F3EF567B7E50B231CE /* Pods-Insta Firebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insta Firebase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Insta Firebase/Pods-Insta Firebase.debug.xcconfig"; sourceTree = "<group>"; };
 		BD09038621038D5D009E66FA /* Insta Firebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Insta Firebase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD09038921038D5D009E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BD09038B21038D5D009E66FA /* signUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpController.swift; sourceTree = "<group>"; };
+		BD09038B21038D5D009E66FA /* signUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
 		BD09038E21038D5D009E66FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD09039021038D5E009E66FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD09039321038D5E009E66FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +37,7 @@
 		BDF6DED12106725F003B9B9F /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		BDF6DED42107FAA1003B9B9F /* UserProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeaderCell.swift; sourceTree = "<group>"; };
 		BDF6DED621080A3D003B9B9F /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
+		BDF6DEDA2108D830003B9B9F /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D5148552221486955550B9DF /* Pods_Insta_Firebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Insta_Firebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A94659D2412D2D23DD607B /* Pods-Insta Firebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Insta Firebase.release.xcconfig"; path = "Pods/Target Support Files/Pods-Insta Firebase/Pods-Insta Firebase.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +84,7 @@
 		BD09038821038D5D009E66FA /* Insta Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				BDF6DED92108D80C003B9B9F /* LogIn */,
 				BDF6DED821080A5C003B9B9F /* Model */,
 				BDF6DED32107FA71003B9B9F /* User Profile */,
 				BDF6DED021066E31003B9B9F /* Controllers */,
@@ -107,7 +110,6 @@
 		BDF6DED021066E31003B9B9F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BD09038B21038D5D009E66FA /* signUpController.swift */,
 				BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */,
 			);
 			path = Controllers;
@@ -128,6 +130,15 @@
 				BDF6DED621080A3D003B9B9F /* UserDetails.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		BDF6DED92108D80C003B9B9F /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				BDF6DEDA2108D830003B9B9F /* LoginController.swift */,
+				BD09038B21038D5D009E66FA /* signUpViewController.swift */,
+			);
+			path = LogIn;
 			sourceTree = "<group>";
 		};
 		C27C24D3D0C2C3950C61AF49 /* Frameworks */ = {
@@ -257,11 +268,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD09038C21038D5D009E66FA /* signUpController.swift in Sources */,
+				BD09038C21038D5D009E66FA /* signUpViewController.swift in Sources */,
 				BDF6DED52107FAA1003B9B9F /* UserProfileHeaderCell.swift in Sources */,
 				BD09038A21038D5D009E66FA /* AppDelegate.swift in Sources */,
 				BDF6DECF21066DC8003B9B9F /* MainTabBarController.swift in Sources */,
 				BDF6DED721080A3D003B9B9F /* UserDetails.swift in Sources */,
+				BDF6DEDB2108D830003B9B9F /* LoginController.swift in Sources */,
 				BDF6DED22106725F003B9B9F /* UserProfileController.swift in Sources */,
 				BD09039D21039FC5009E66FA /* Uitilities.swift in Sources */,
 			);

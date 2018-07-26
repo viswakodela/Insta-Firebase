@@ -10,13 +10,24 @@ import UIKit
 import FirebaseAuth
 
 class MainTabBarController: UITabBarController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if Auth.auth().currentUser == nil{
-//            present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+//             Show this if the user is not logged in
+            
+            DispatchQueue.main.async {
+                let logInController = LoginController()
+                let navController = UINavigationController(rootViewController: logInController)
+                self.present(navController, animated: true, completion: nil)
+            }
+            return
         }
-        
+       setUpControllers()
+    }
+    
+    func setUpControllers(){
         
         let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
         

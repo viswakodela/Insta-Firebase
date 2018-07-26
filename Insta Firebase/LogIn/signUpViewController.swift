@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class signUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class signUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,7 @@ class signUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         plusButtonConstraints()
         
         setUpTextFields()
+        signInBottomButtonConstraints()
         
     }
     
@@ -133,6 +134,38 @@ class signUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return button
     }()
     
+    let value = 1...5
+    
+    let logInButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account  ", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        
+        attributedTitle.append(NSAttributedString(string: "Sign In", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor : UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        
+        //        attributedText.append([])
+        
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(handleSignInButton), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func handleSignInButton(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func signInBottomButtonConstraints(){
+        
+        view.addSubview(logInButton)
+        
+        logInButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        logInButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 10).isActive = true
+        logInButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        logInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
     fileprivate func setUpTextFields(){
         
         let stackView = UIStackView(arrangedSubviews: [emailTextField, userNameTextField, passwordTextField, signUpButton])
@@ -188,6 +221,8 @@ class signUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                             if error != nil{
                                 print(error ?? "Error updating the Values")
                             }
+                            let mainController = MainTabBarController()
+                            self.present(mainController, animated: true, completion: nil)
                         })
                     }
                 })

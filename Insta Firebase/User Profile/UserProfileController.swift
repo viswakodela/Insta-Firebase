@@ -39,13 +39,12 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             do{
                 try Auth.auth().signOut()
-//                self.present(self.logInController, animated: true, completion: nil)
-                
+                let logInController = LoginController()
+                let navController = UINavigationController(rootViewController: logInController)
+                self.present(navController, animated: true, completion: nil)
             }catch{
                 print(error)
             }
-            
-            
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(alertAction)

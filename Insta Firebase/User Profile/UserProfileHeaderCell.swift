@@ -14,7 +14,6 @@ class UserProfileHeaderCell: UICollectionViewCell{
     
     let profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.backgroundColor = .red
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.layer.cornerRadius = 40
         iv.contentMode = .scaleAspectFill
@@ -56,7 +55,7 @@ class UserProfileHeaderCell: UICollectionViewCell{
         
         let attributedText = NSMutableAttributedString(string: "0\n", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
         
-        attributedText.append(NSAttributedString(string: "posts", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.lightGray, kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)]))
+        attributedText.append(NSAttributedString(string: "posts", attributes: [ kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         
         
         label.attributedText = attributedText
@@ -71,7 +70,7 @@ class UserProfileHeaderCell: UICollectionViewCell{
         
         let attributedText = NSMutableAttributedString(string: "0\n", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
         
-        attributedText.append(NSAttributedString(string: "followers", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.lightGray, kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)]))
+        attributedText.append(NSAttributedString(string: "followers", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         label.attributedText = attributedText
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -84,7 +83,7 @@ class UserProfileHeaderCell: UICollectionViewCell{
         
         let attributedText = NSMutableAttributedString(string: "0\n", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
         
-        attributedText.append(NSAttributedString(string: "following", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.lightGray, kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)]))
+        attributedText.append(NSAttributedString(string: "following", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
             label.attributedText = attributedText
             
         label.numberOfLines = 0
@@ -123,7 +122,7 @@ class UserProfileHeaderCell: UICollectionViewCell{
         
         addSubview(editProfileButton)
         
-        editProfileButton.topAnchor.constraint(equalTo: postsLabel.bottomAnchor, constant: 12).isActive = true
+        editProfileButton.topAnchor.constraint(equalTo: postsLabel.bottomAnchor, constant: 5).isActive = true
         editProfileButton.leftAnchor.constraint(equalTo: postsLabel.leftAnchor).isActive = true
         editProfileButton.rightAnchor.constraint(equalTo: followingLabel.rightAnchor).isActive = true
         editProfileButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
