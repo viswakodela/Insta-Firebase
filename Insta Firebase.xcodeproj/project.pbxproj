@@ -88,7 +88,7 @@
 				BDF6DED821080A5C003B9B9F /* Model */,
 				BDF6DED32107FA71003B9B9F /* User Profile */,
 				BDF6DED021066E31003B9B9F /* Controllers */,
-				BD09039B21039FB3009E66FA /* New Group */,
+				BD09039B21039FB3009E66FA /* Utils */,
 				BD09038921038D5D009E66FA /* AppDelegate.swift */,
 				BD09038D21038D5D009E66FA /* Main.storyboard */,
 				BD09039021038D5E009E66FA /* Assets.xcassets */,
@@ -99,12 +99,12 @@
 			path = "Insta Firebase";
 			sourceTree = "<group>";
 		};
-		BD09039B21039FB3009E66FA /* New Group */ = {
+		BD09039B21039FB3009E66FA /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				BD09039C21039FC5009E66FA /* Uitilities.swift */,
 			);
-			path = "New Group";
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		BDF6DED021066E31003B9B9F /* Controllers */ = {
