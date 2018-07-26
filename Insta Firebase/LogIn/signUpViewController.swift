@@ -12,15 +12,17 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class signUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
         view.addSubview(plusPhotoButton)
         plusButtonConstraints()
         
         setUpTextFields()
+        signInBottomButtonConstraints()
         
     }
     
@@ -132,6 +134,54 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return button
     }()
     
+    let value = 1...5
+    
+    let logInButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account  ", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        
+        attributedTitle.append(NSAttributedString(string: "Sign In", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor : UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        
+        //        attributedText.append([])
+        
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(handleSignInButton), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func handleSignInButton(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func signInBottomButtonConstraints(){
+        
+        view.addSubview(logInButton)
+        
+        logInButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        logInButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 10).isActive = true
+        logInButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        logInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    fileprivate func setUpTextFields(){
+        
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, userNameTextField, passwordTextField, signUpButton])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+                                     stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+                                     stackView.topAnchor.constraint(equalTo: plusPhotoButton.bottomAnchor, constant: 20),
+                                     stackView.heightAnchor.constraint(equalToConstant: 200)])
+    }
+    
     @objc func handleSignUp(){
         
         guard let email = emailTextField.text, email.count > 0 else{return}
@@ -171,31 +221,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                             if error != nil{
                                 print(error ?? "Error updating the Values")
                             }
+                            let mainController = MainTabBarController()
+                            self.present(mainController, animated: true, completion: nil)
                         })
                     }
                 })
             })
         }
     }
-    
-    fileprivate func setUpTextFields(){
-        
-        let stackView = UIStackView(arrangedSubviews: [emailTextField, userNameTextField, passwordTextField, signUpButton])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        
-        view.addSubview(stackView)
-        
-        NSLayoutConstraint.activate([stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-                                     stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
-                                     stackView.topAnchor.constraint(equalTo: plusPhotoButton.bottomAnchor, constant: 20),
-                                     stackView.heightAnchor.constraint(equalToConstant: 200)])
-    }
-    
-    
-    
     
 }
 
