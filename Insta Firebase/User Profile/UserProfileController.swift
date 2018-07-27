@@ -39,9 +39,9 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             do{
                 try Auth.auth().signOut()
-                let logInController = LoginController()
-                let navController = UINavigationController(rootViewController: logInController)
-                self.present(navController, animated: true, completion: nil)
+                let mainBarController = MainTabBarController()
+//                let navController = UINavigationController(rootViewController: logInController)
+                self.present(mainBarController, animated: true, completion: nil)
             }catch{
                 print(error)
             }

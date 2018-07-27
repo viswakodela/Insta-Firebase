@@ -102,7 +102,6 @@ class LoginController: UIViewController {
             
 //            print(result?.user.uid)
             let mainTabController = MainTabBarController()
-            
             self.present(mainTabController, animated: true, completion: nil)
         }
     }
