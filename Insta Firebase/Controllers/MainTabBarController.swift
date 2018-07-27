@@ -9,10 +9,28 @@
 import UIKit
 import FirebaseAuth
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+    
+    
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
+        let index = viewControllers?.index(of: viewController)
+        if index == 2{
+            let photSelectorController = PhotoSelectorcontroller(collectionViewLayout: UICollectionViewFlowLayout())
+            let photoSelectNavController = UINavigationController(rootViewController: photSelectorController)
+            present(photoSelectNavController, animated: true, completion: nil)
+            return false
+            
+        }
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.delegate = self
         
         if Auth.auth().currentUser == nil{
 //             Show this if the user is not logged in
@@ -44,20 +62,15 @@ class MainTabBarController: UITabBarController {
         let plusController = tabBarControllers(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"))
         
         // UserProfile
-        let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
-        
-        let userNavController = UINavigationController(rootViewController: userProfileController)
-        
-        userNavController.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected")
-        userNavController.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected")
+        let userProfileController = tabBarControllers(unselectedImage: #imageLiteral(resourceName: "profile_unselected"), selectedImage: #imageLiteral(resourceName: "profile_selected"), rootViewController: UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()))
         
         tabBar.tintColor = .black
         
         viewControllers = [homeController,
                            searchController,
-                           likeController,
                            plusController,
-                           userNavController]
+                           likeController,
+                           userProfileController]
         
         guard let items = tabBar.items else{return}
         for item in items{
@@ -67,21 +80,13 @@ class MainTabBarController: UITabBarController {
     }
     
     fileprivate func tabBarControllers(unselectedImage: UIImage, selectedImage: UIImage, rootViewController: UIViewController = UIViewController()) -> UINavigationController{
+        
         let viewController = rootViewController
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem.image = unselectedImage
         navController.tabBarItem.selectedImage = selectedImage
         return navController
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

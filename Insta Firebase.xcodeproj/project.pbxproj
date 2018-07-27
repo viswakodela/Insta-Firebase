@@ -15,6 +15,8 @@
 		BD09039421038D5E009E66FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD09039221038D5E009E66FA /* LaunchScreen.storyboard */; };
 		BD09039D21039FC5009E66FA /* Uitilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09039C21039FC5009E66FA /* Uitilities.swift */; };
 		BD09039F2103FE9A009E66FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD09039E2103FE9A009E66FA /* GoogleService-Info.plist */; };
+		BDCFC89E210A91C800108B35 /* PhotoSelectorcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFC89D210A91C800108B35 /* PhotoSelectorcontroller.swift */; };
+		BDCFC8A0210AA7F300108B35 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFC89F210AA7F300108B35 /* PhotoSelectorCell.swift */; };
 		BDF6DECF21066DC8003B9B9F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */; };
 		BDF6DED22106725F003B9B9F /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DED12106725F003B9B9F /* UserProfileController.swift */; };
 		BDF6DED52107FAA1003B9B9F /* UserProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DED42107FAA1003B9B9F /* UserProfileHeaderCell.swift */; };
@@ -33,6 +35,8 @@
 		BD09039521038D5E009E66FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD09039C21039FC5009E66FA /* Uitilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uitilities.swift; sourceTree = "<group>"; };
 		BD09039E2103FE9A009E66FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BDCFC89D210A91C800108B35 /* PhotoSelectorcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorcontroller.swift; sourceTree = "<group>"; };
+		BDCFC89F210AA7F300108B35 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		BDF6DED12106725F003B9B9F /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		BDF6DED42107FAA1003B9B9F /* UserProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeaderCell.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 		BD09038821038D5D009E66FA /* Insta Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				BDCFC89C210A90CF00108B35 /* Add Photo */,
 				BDF6DED92108D80C003B9B9F /* LogIn */,
 				BDF6DED821080A5C003B9B9F /* Model */,
 				BDF6DED32107FA71003B9B9F /* User Profile */,
@@ -105,6 +110,15 @@
 				BD09039C21039FC5009E66FA /* Uitilities.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		BDCFC89C210A90CF00108B35 /* Add Photo */ = {
+			isa = PBXGroup;
+			children = (
+				BDCFC89D210A91C800108B35 /* PhotoSelectorcontroller.swift */,
+				BDCFC89F210AA7F300108B35 /* PhotoSelectorCell.swift */,
+			);
+			path = "Add Photo";
 			sourceTree = "<group>";
 		};
 		BDF6DED021066E31003B9B9F /* Controllers */ = {
@@ -268,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDCFC89E210A91C800108B35 /* PhotoSelectorcontroller.swift in Sources */,
 				BD09038C21038D5D009E66FA /* signUpViewController.swift in Sources */,
 				BDF6DED52107FAA1003B9B9F /* UserProfileHeaderCell.swift in Sources */,
 				BD09038A21038D5D009E66FA /* AppDelegate.swift in Sources */,
@@ -276,6 +291,7 @@
 				BDF6DEDB2108D830003B9B9F /* LoginController.swift in Sources */,
 				BDF6DED22106725F003B9B9F /* UserProfileController.swift in Sources */,
 				BD09039D21039FC5009E66FA /* Uitilities.swift in Sources */,
+				BDCFC8A0210AA7F300108B35 /* PhotoSelectorCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
