@@ -80,8 +80,58 @@ class SharePhotoController: UIViewController{
     
     @objc func handleShare(){
         
+        let fileName = NSUUID().uuidString
+        let storageRef = Storage.storage().reference().child("posts").child(fileName)
         
+        guard let image = selectedImage else { return }
+        guard let uploadData = UIImageJPEGRepresentation(image, 0.5) else{return}
         
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+            
+            if error != nil {
+                print(error ?? "Error Uploading the image into the Firebase")
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+            }
+            
+            storageRef.downloadURL(completion: { (url, error) in
+                if error != nil {
+                    print(error ?? "Error creating the downloadURl")
+                    self.navigationItem.rightBarButtonItem?.isEnabled = true
+                }
+                
+                if let imageUrl = url?.absoluteString{
+                    
+                    self.saveDataIntoFirebase(imageUrl: imageUrl)
+                    
+                }
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
     }
+    
+    fileprivate func saveDataIntoFirebase(imageUrl: String){
+        
+        guard let postImage = selectedImage else { return }
+    
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let postsRef = Database.database().reference().child("posts").child(uid).childByAutoId()
+        guard let caption = textView.text else { return }
+        
+        let values: [String : Any] = ["imageUrl": imageUrl, "caption": caption, "imageWidth": postImage.size.width, "imageHeight": postImage.size.height, "creationDate": Date.timeIntervalSinceReferenceDate]
+        
+        postsRef.updateChildValues(values) { (error, ref) in
+            if error != nil{
+                print(error ?? "Error Updating the values in Posts Node")
+                self.navigationItem.rightBarButtonItem?.isEnabled = false
+            }
+        }
+    }
+    
+    
+    
+    
+    
     
 }
