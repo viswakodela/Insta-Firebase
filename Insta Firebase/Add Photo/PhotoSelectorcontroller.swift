@@ -90,7 +90,13 @@ class PhotoSelectorcontroller: UICollectionViewController, UICollectionViewDeleg
     }
     @objc func NextButton(){
         
+        let sharePhotoController = SharePhotoController()
+        sharePhotoController.selectedImage = headerCell?.photoImageView.image
+        navigationController?.pushViewController(sharePhotoController, animated: true)
+        
     }
+    
+    
     
     //MARK :- CollectionView Cell Methods
     
@@ -109,7 +115,12 @@ class PhotoSelectorcontroller: UICollectionViewController, UICollectionViewDeleg
         
         self.seletcedImage = images[indexPath.item]
         self.collectionView?.reloadData()
+        
+        let indexpath = IndexPath(item: 0, section: 0)
+        collectionView.scrollToItem(at: indexpath, at: .bottom, animated: true)
     }
+    
+    
     
     // UICollectionViewDelegateFlowLayout Protocol Methods
     
@@ -130,6 +141,8 @@ class PhotoSelectorcontroller: UICollectionViewController, UICollectionViewDeleg
     
     //MARK :- CollectionView Header Methods
     
+    var headerCell: PhotoSelectorHeaderCell?
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! PhotoSelectorHeaderCell
@@ -146,6 +159,7 @@ class PhotoSelectorcontroller: UICollectionViewController, UICollectionViewDeleg
                 imageManager.requestImage(for: selectedAsset, targetSize: targetSize, contentMode: .default, options: nil) { (image, info) in
                     
                     header.photoImageView.image = image
+                    self.headerCell = header
                 }
             }
         }
