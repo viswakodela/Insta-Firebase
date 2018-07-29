@@ -17,6 +17,8 @@
 		BD09039F2103FE9A009E66FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD09039E2103FE9A009E66FA /* GoogleService-Info.plist */; };
 		BD46730D210B783E00FF376A /* PhotoSelectorHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD46730C210B783E00FF376A /* PhotoSelectorHeaderCell.swift */; };
 		BD765501210CD57200F63831 /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765500210CD57200F63831 /* SharePhotoController.swift */; };
+		BD765503210D414100F63831 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765502210D414100F63831 /* Posts.swift */; };
+		BD765505210D43CD00F63831 /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765504210D43CD00F63831 /* UserProfileCell.swift */; };
 		BDCFC89E210A91C800108B35 /* PhotoSelectorcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFC89D210A91C800108B35 /* PhotoSelectorcontroller.swift */; };
 		BDCFC8A0210AA7F300108B35 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFC89F210AA7F300108B35 /* PhotoSelectorCell.swift */; };
 		BDF6DECF21066DC8003B9B9F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */; };
@@ -39,6 +41,8 @@
 		BD09039E2103FE9A009E66FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD46730C210B783E00FF376A /* PhotoSelectorHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeaderCell.swift; sourceTree = "<group>"; };
 		BD765500210CD57200F63831 /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
+		BD765502210D414100F63831 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
+		BD765504210D43CD00F63831 /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
 		BDCFC89D210A91C800108B35 /* PhotoSelectorcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorcontroller.swift; sourceTree = "<group>"; };
 		BDCFC89F210AA7F300108B35 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 			children = (
 				BDF6DED12106725F003B9B9F /* UserProfileController.swift */,
 				BDF6DED42107FAA1003B9B9F /* UserProfileHeaderCell.swift */,
+				BD765504210D43CD00F63831 /* UserProfileCell.swift */,
 			);
 			path = "User Profile";
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				BDF6DED621080A3D003B9B9F /* UserDetails.swift */,
+				BD765502210D414100F63831 /* Posts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -290,9 +296,11 @@
 			files = (
 				BDCFC89E210A91C800108B35 /* PhotoSelectorcontroller.swift in Sources */,
 				BD09038C21038D5D009E66FA /* signUpViewController.swift in Sources */,
+				BD765505210D43CD00F63831 /* UserProfileCell.swift in Sources */,
 				BDF6DED52107FAA1003B9B9F /* UserProfileHeaderCell.swift in Sources */,
 				BD09038A21038D5D009E66FA /* AppDelegate.swift in Sources */,
 				BDF6DECF21066DC8003B9B9F /* MainTabBarController.swift in Sources */,
+				BD765503210D414100F63831 /* Posts.swift in Sources */,
 				BD46730D210B783E00FF376A /* PhotoSelectorHeaderCell.swift in Sources */,
 				BD765501210CD57200F63831 /* SharePhotoController.swift in Sources */,
 				BDF6DED721080A3D003B9B9F /* UserDetails.swift in Sources */,
