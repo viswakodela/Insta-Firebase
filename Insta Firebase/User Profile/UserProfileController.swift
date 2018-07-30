@@ -33,7 +33,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let ref = Database.database().reference().child("posts").child(uid)
-        ref.observe(.childAdded, with: { (snapshot) in
+        ref.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
             
 //            print(snapshot.value)
             
@@ -74,7 +74,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         present(alertController, animated: true, completion: nil)
     }
     
-    //MARKUP :- Methods for the Header of the CollectionView
+    //MARKUP :- Methods of CollectionView's Header
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -126,7 +126,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         Database.database().reference().child("users").child(uid).observe(.value, with: { (snapshot) in
             
-            print(snapshot)
+//            print(snapshot)
             guard let dictionary = snapshot.value as? [String : Any] else {return}
             self.user = UserDetails(dictionary: dictionary)
             

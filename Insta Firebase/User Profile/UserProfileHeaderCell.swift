@@ -12,8 +12,8 @@ import FirebaseAuth
 
 class UserProfileHeaderCell: UICollectionViewCell{
     
-    let profileImageView: UIImageView = {
-        let iv = UIImageView()
+    let profileImageView: CustomImageView = {
+        let iv = CustomImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.layer.cornerRadius = 40
         iv.contentMode = .scaleAspectFill
@@ -194,28 +194,8 @@ class UserProfileHeaderCell: UICollectionViewCell{
         didSet{
             
             self.userNameLabel.text = self.user?.userName
-            setUpProfileImageView()
-        }
-    }
-    
-    func setUpProfileImageView(){
-        
-        guard let profileImageUrl = user?.profileImageUrl else { return }
-        
-        if let url = URL(string: profileImageUrl) {
-            URLSession.shared.dataTask(with: url , completionHandler: { (data, respomse, error) in
-                if error != nil {
-                    print(error ?? "Error fetching the image from Firebase")
-                }
-                
-                guard let data = data else { return }
-                let image = UIImage(data: data)
-                
-                DispatchQueue.main.async {
-                    self.profileImageView.image = image
-                    
-                }
-            }).resume()
+            guard let urlString = user?.profileImageUrl else {return}
+            profileImageView.loadImage(urlString: urlString)
         }
     }
     
