@@ -50,7 +50,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         
         //Home
-        let homeController = tabBarControllers(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: UIViewController())
+        let homeController = tabBarControllers(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: HomeController(collectionViewLayout: UICollectionViewFlowLayout()))
         
         //Search
         let searchController = tabBarControllers(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"))

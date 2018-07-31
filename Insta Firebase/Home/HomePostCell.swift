@@ -1,0 +1,167 @@
+//
+//  HomePostCell.swift
+//  Insta Firebase
+//
+//  Created by Viswa Kodela on 7/30/18.
+//  Copyright © 2018 Viswa Kodela. All rights reserved.
+//
+
+import UIKit
+
+class HomePostCell: UICollectionViewCell{
+    
+    let PhotoImageView: CustomImageView = {
+        let iv = CustomImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        return iv
+    }()
+    
+    let userProfileImageView: CustomImageView = {
+        let iv = CustomImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
+        iv.layer.cornerRadius = 20
+        iv.clipsToBounds = true
+        iv.backgroundColor = .red
+        return iv
+    }()
+    
+    let userNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "User Name"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        return label
+    }()
+    
+    let optionsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("•••", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        return button
+    }()
+    
+    let likeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let commentButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "comment").withRenderingMode(.alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let sendMessageButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "send2").withRenderingMode(.alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let bookmarkButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "ribbon").withRenderingMode(.alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let captionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let attributedText = NSMutableAttributedString(string: "Username", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
+        
+        attributedText.append(NSAttributedString(string: " Some caption text that will perhaps wraps on to the next line", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.systemFont(ofSize: 14)]))
+        
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 3)]))
+        
+        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.gray]))
+        
+        label.attributedText = attributedText
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    var post: Posts? {
+        didSet{
+            guard let imageUrl = post?.imageUrl else {return}
+            PhotoImageView.loadImage(urlString: imageUrl)
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        
+        addSubview(userProfileImageView)
+        addSubview(userNameLabel)
+        addSubview(optionsButton)
+        addSubview(PhotoImageView)
+        
+        userProfileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        userProfileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+        userProfileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        userProfileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        userNameLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        userNameLabel.leftAnchor.constraint(equalTo: userProfileImageView.rightAnchor, constant: 8).isActive = true
+        userNameLabel.rightAnchor.constraint(equalTo: optionsButton.leftAnchor).isActive = true
+        userNameLabel.bottomAnchor.constraint(equalTo: PhotoImageView.topAnchor).isActive = true
+        
+        optionsButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        optionsButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        optionsButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        optionsButton.bottomAnchor.constraint(equalTo: PhotoImageView.topAnchor).isActive = true
+        
+        
+        PhotoImageView.topAnchor.constraint(equalTo: userProfileImageView.bottomAnchor, constant: 8).isActive = true
+        PhotoImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        PhotoImageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        PhotoImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        
+        setUpActionButtons()
+        
+        addSubview(bookmarkButton)
+        
+        bookmarkButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        bookmarkButton.topAnchor.constraint(equalTo: PhotoImageView.bottomAnchor).isActive = true
+        bookmarkButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        bookmarkButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        addSubview(captionLabel)
+        
+        captionLabel.topAnchor.constraint(equalTo: bookmarkButton.bottomAnchor).isActive = true
+        captionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+        captionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        captionLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+    }
+    
+    fileprivate func setUpActionButtons(){
+        
+        let stackView = UIStackView(arrangedSubviews: [likeButton,commentButton,sendMessageButton])
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(stackView)
+        
+        stackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+        stackView.topAnchor.constraint(equalTo: PhotoImageView.bottomAnchor).isActive = true
+        stackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        stackView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+}

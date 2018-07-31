@@ -20,6 +20,8 @@
 		BD765503210D414100F63831 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765502210D414100F63831 /* Posts.swift */; };
 		BD765505210D43CD00F63831 /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765504210D43CD00F63831 /* UserProfileCell.swift */; };
 		BD765507210F732900F63831 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765506210F732900F63831 /* CustomImageView.swift */; };
+		BD76550A210FC74C00F63831 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765509210FC74C00F63831 /* HomeController.swift */; };
+		BD76550C210FC97800F63831 /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD76550B210FC97800F63831 /* HomePostCell.swift */; };
 		BDCFC89E210A91C800108B35 /* PhotoSelectorcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFC89D210A91C800108B35 /* PhotoSelectorcontroller.swift */; };
 		BDCFC8A0210AA7F300108B35 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFC89F210AA7F300108B35 /* PhotoSelectorCell.swift */; };
 		BDF6DECF21066DC8003B9B9F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */; };
@@ -45,6 +47,8 @@
 		BD765502210D414100F63831 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		BD765504210D43CD00F63831 /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
 		BD765506210F732900F63831 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		BD765509210FC74C00F63831 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		BD76550B210FC97800F63831 /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		BDCFC89D210A91C800108B35 /* PhotoSelectorcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorcontroller.swift; sourceTree = "<group>"; };
 		BDCFC89F210AA7F300108B35 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 		BD09038821038D5D009E66FA /* Insta Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				BD765508210FC73400F63831 /* Home */,
 				BDCFC89C210A90CF00108B35 /* Add Photo */,
 				BDF6DED92108D80C003B9B9F /* LogIn */,
 				BDF6DED821080A5C003B9B9F /* Model */,
@@ -121,6 +126,15 @@
 				BD765506210F732900F63831 /* CustomImageView.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		BD765508210FC73400F63831 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BD765509210FC74C00F63831 /* HomeController.swift */,
+				BD76550B210FC97800F63831 /* HomePostCell.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		BDCFC89C210A90CF00108B35 /* Add Photo */ = {
@@ -298,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDCFC89E210A91C800108B35 /* PhotoSelectorcontroller.swift in Sources */,
+				BD76550C210FC97800F63831 /* HomePostCell.swift in Sources */,
 				BD09038C21038D5D009E66FA /* signUpViewController.swift in Sources */,
 				BD765505210D43CD00F63831 /* UserProfileCell.swift in Sources */,
 				BDF6DED52107FAA1003B9B9F /* UserProfileHeaderCell.swift in Sources */,
@@ -309,6 +324,7 @@
 				BD765501210CD57200F63831 /* SharePhotoController.swift in Sources */,
 				BDF6DED721080A3D003B9B9F /* UserDetails.swift in Sources */,
 				BDF6DEDB2108D830003B9B9F /* LoginController.swift in Sources */,
+				BD76550A210FC74C00F63831 /* HomeController.swift in Sources */,
 				BDF6DED22106725F003B9B9F /* UserProfileController.swift in Sources */,
 				BD09039D21039FC5009E66FA /* Uitilities.swift in Sources */,
 				BDCFC8A0210AA7F300108B35 /* PhotoSelectorCell.swift in Sources */,
