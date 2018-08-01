@@ -24,7 +24,6 @@ class HomePostCell: UICollectionViewCell{
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 20
         iv.clipsToBounds = true
-        iv.backgroundColor = .red
         return iv
     }()
     
@@ -75,16 +74,6 @@ class HomePostCell: UICollectionViewCell{
     let captionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        
-        let attributedText = NSMutableAttributedString(string: "Username", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
-        
-        attributedText.append(NSAttributedString(string: " Some caption text that will perhaps wraps on to the next line", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.systemFont(ofSize: 14)]))
-        
-        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 3)]))
-        
-        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.gray]))
-        
-        label.attributedText = attributedText
         label.numberOfLines = 0
         return label
     }()
@@ -93,7 +82,32 @@ class HomePostCell: UICollectionViewCell{
         didSet{
             guard let imageUrl = post?.imageUrl else {return}
             PhotoImageView.loadImage(urlString: imageUrl)
+            userNameLabel.text = post?.user?.username
+            captionLabel.text = post?.caption
+            
+            guard let userProfileUrl = post?.user?.profileImageUrl else {return}
+            userProfileImageView.loadImage(urlString: userProfileUrl)
+            
+            setUpAttributedLabelText()
         }
+    }
+    
+    fileprivate func setUpAttributedLabelText(){
+        
+        guard let post = self.post else {return}
+        guard let username = post.user?.username else {return}
+        guard let caption = post.caption else {return}
+        
+        let attributedText = NSMutableAttributedString(string: username, attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
+        
+        attributedText.append(NSAttributedString(string: " "+caption, attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.systemFont(ofSize: 14)]))
+        
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 3)]))
+        
+        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.gray]))
+        
+        captionLabel.attributedText = attributedText
+        
     }
     
     override init(frame: CGRect) {

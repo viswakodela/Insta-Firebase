@@ -36,7 +36,7 @@ class SharePhotoController: UIViewController{
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFill
+        iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         return iv
     }()
@@ -128,10 +128,6 @@ class SharePhotoController: UIViewController{
             }
         }
     }
-    
-    
-    
-    
     
     
 }

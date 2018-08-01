@@ -72,6 +72,7 @@ class UserProfileHeaderCell: UICollectionViewCell{
         
         attributedText.append(NSAttributedString(string: "followers", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
         label.attributedText = attributedText
+        
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -190,10 +191,10 @@ class UserProfileHeaderCell: UICollectionViewCell{
         
     }
     
-    var user: UserDetails? {
+    var user: Users? {
         didSet{
             
-            self.userNameLabel.text = self.user?.userName
+            self.userNameLabel.text = self.user?.username
             guard let urlString = user?.profileImageUrl else {return}
             profileImageView.loadImage(urlString: urlString)
         }

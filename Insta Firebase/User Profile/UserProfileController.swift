@@ -38,9 +38,15 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
 //            print(snapshot.value)
             
             guard let dictionary = snapshot.value as? [String : Any] else { return }
+            
+            guard let user = self.user else {return}
             let post = Posts()
             post.imageUrl = dictionary["imageUrl"] as? String
-            self.posts.append(post)
+            post.caption = dictionary["caption"] as? String
+            post.user = user
+            
+            self.posts.insert(post, at: 0)
+//            self.posts.append(post)
             
             self.collectionView?.reloadData()
             
@@ -118,20 +124,28 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         return CGSize(width: width, height: width)
     }
     
-    var user: UserDetails?
+    var user: Users?
     
     fileprivate func fetchUser(){
         
         guard let uid = Auth.auth().currentUser?.uid else{return}
         
-        Database.database().reference().child("users").child(uid).observe(.value, with: { (snapshot) in
+        Database.fetchUserWithUID(uid: uid) { (user) in
             
-//            print(snapshot)
-            guard let dictionary = snapshot.value as? [String : Any] else {return}
-            self.user = UserDetails(dictionary: dictionary)
-            
-            self.navigationItem.title = "ℑ𝔫𝔰𝔱𝔞𝔤𝔯𝔞𝔪"
+            self.user = user
+            self.navigationItem.title = self.user?.username
             self.collectionView?.reloadData()
-        }, withCancel: nil)
+
+        }
+        
+//        Database.database().reference().child("users").child(uid).observe(.value, with: { (snapshot) in
+//
+////            print(snapshot)
+//            guard let dictionary = snapshot.value as? [String : Any] else {return}
+//            self.user = Users(uid: uid, dictionary: dictionary)
+//
+//            self.navigationItem.title = self.user?.username
+//            self.collectionView?.reloadData()
+//        }, withCancel: nil)
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
+
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func viewDidLoad() {
@@ -28,12 +29,31 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         guard let uid = Auth.auth().currentUser?.uid else {return}
         
-        let ref = Database.database().reference().child("posts").child(uid)
+        // This method is from Firebase utils file
+        Database.fetchUserWithUID(uid: uid) { (user) in
+            self.fetchPostsWithUser(user: user)
+        }
+        
+//        Database.database().reference().child("users").child(uid).observe(.value) { (snapshot) in
+//            guard let dictionary = snapshot.value as? [String : Any] else {return}
+//
+//            let user = Users(uid: uid, dictionary: dictionary)
+//
+//            self.fetchPostsWithUser(user: user)
+//        }
+    }
+    
+    fileprivate func fetchPostsWithUser(user: Users){
+        
+        let ref = Database.database().reference().child("posts").child(user.uid)
         ref.observe(.childAdded) { (snap) in
             guard let dictionary = snap.value as? [String : Any] else {return }
+            
             let post = Posts()
             post.imageUrl = dictionary["imageUrl"] as? String
-            self.posts.append(post)
+            post.caption = dictionary["caption"] as? String
+            post.user = user
+            self.posts.insert(post, at: 0)
             
             self.collectionView?.reloadData()
         }
