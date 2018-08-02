@@ -35,6 +35,23 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     var posts = [Posts]()
     
+    var user: Users?
+    
+    fileprivate func fetchUser(){
+        
+        let uid = userId ?? Auth.auth().currentUser?.uid ?? ""
+        
+        Database.fetchUserWithUID(uid: uid) { (user) in
+            
+            self.user = user
+            self.navigationItem.title = self.user?.username
+            self.collectionView?.reloadData()
+            
+            self.fetchPosts()
+            
+        }
+    }
+    
     fileprivate func fetchPosts(){
         
         guard let uid = user?.uid else{return}
@@ -130,21 +147,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         return CGSize(width: width, height: width)
     }
     
-    var user: Users?
-    
-    fileprivate func fetchUser(){
-        
-        let uid = userId ?? Auth.auth().currentUser?.uid ?? ""
-        
-        Database.fetchUserWithUID(uid: uid) { (user) in
-            
-            self.user = user
-            self.navigationItem.title = self.user?.username
-            self.collectionView?.reloadData()
-            
-            self.fetchPosts()
-
-        }
+   
         
 //        Database.database().reference().child("users").child(uid).observe(.value, with: { (snapshot) in
 //
@@ -155,5 +158,5 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
 //            self.navigationItem.title = self.user?.username
 //            self.collectionView?.reloadData()
 //        }, withCancel: nil)
-    }
+    
 }

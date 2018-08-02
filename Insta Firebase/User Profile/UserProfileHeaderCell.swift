@@ -128,12 +128,13 @@ class UserProfileHeaderCell: UICollectionViewCell{
         Database.database().reference().child("following").child(currentLoggedInUser).child(userId).observe(.value) { (snap) in
                 
                 if let isFollwing = snap.value as? Int, isFollwing == 1 {
-                    
+                    //Unfollow
                     self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
                     self.editProfileFollowButton.setTitleColor(.white, for: .normal)
                     self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
                     self.editProfileFollowButton.layer.borderColor = UIColor(white: 0, alpha: 0.7).cgColor
                 }else {
+                    //Follow
                     self.editProfileFollowButton.setTitle("Follow", for: .normal)
                     self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
                     self.editProfileFollowButton.setTitleColor(.white, for: .normal)
@@ -151,7 +152,8 @@ class UserProfileHeaderCell: UICollectionViewCell{
         
         if editProfileFollowButton.titleLabel?.text == "Unfollow"{
             
-            Database.database().reference().child("following").child(currentLoggedInUser).child(userId).removeValue { (error, ref) in
+        //Unfollow
+        Database.database().reference().child("following").child(currentLoggedInUser).child(userId).removeValue { (error, ref) in
                 if error != nil{
                     print(error ?? "Error Unfollwing the user")
                 }
@@ -160,6 +162,7 @@ class UserProfileHeaderCell: UICollectionViewCell{
             
         }else{
             
+            // Follow
             let followingReference = Database.database().reference().child("following").child(currentLoggedInUser)
             
             let values = [userId: 1]

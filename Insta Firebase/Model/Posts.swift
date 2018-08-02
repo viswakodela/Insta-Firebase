@@ -13,5 +13,6 @@ class Posts{
     var user: Users?
     var imageUrl: String?
     var caption: String?
+    var creationDate: Date?
     
 }

@@ -104,7 +104,9 @@ class HomePostCell: UICollectionViewCell{
         
         attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 3)]))
         
-        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.gray]))
+        guard let timeAgo = post.creationDate?.timeAgoDisplay() else {return}
+        
+        attributedText.append(NSAttributedString(string: timeAgo, attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.gray]))
         
         captionLabel.attributedText = attributedText
         

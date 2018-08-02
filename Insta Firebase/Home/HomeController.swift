@@ -21,6 +21,22 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         setUpNavigationItems()
         fetchPosts()
+        
+       fetchFollowingUserIds()
+    }
+    
+    fileprivate func fetchFollowingUserIds() {
+        
+        guard let currentUserId = Auth.auth().currentUser?.uid else{return}
+        Database.database().reference().child("following").child(currentUserId).observe(.childAdded) { (snapshot) in
+            
+            let uid = snapshot.key
+//            guard let userIdsDictionary = snapshot.value as? [String : Any] else {return}
+            
+            Database.fetchUserWithUID(uid: uid, completion: { (user) in
+                self.fetchPostsWithUser(user: user)
+            })
+        }
     }
     
     var posts = [Posts]()
@@ -53,7 +69,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             post.imageUrl = dictionary["imageUrl"] as? String
             post.caption = dictionary["caption"] as? String
             post.user = user
+            
+            guard let secondsFrom1970 = dictionary["creationDate"] as? Double else{return}
+            post.creationDate = Date(timeIntervalSince1970: secondsFrom1970)
+            
             self.posts.insert(post, at: 0)
+            
+            self.posts.sort(by: { (p1, p2) -> Bool in
+                return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
+            })
             
             self.collectionView?.reloadData()
         }
@@ -90,3 +114,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     
 }
+
+
+
+

@@ -94,6 +94,7 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
             
             self.filteredUsers = self.users
             self.collectionView?.reloadData()
+            
 //            dictionary.forEach({ (key, value) in
 //
 //                guard let userDictionary = value as? [String : Any] else {return}
