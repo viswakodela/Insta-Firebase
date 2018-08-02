@@ -23,6 +23,8 @@
 		BD76550A210FC74C00F63831 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765509210FC74C00F63831 /* HomeController.swift */; };
 		BD76550C210FC97800F63831 /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD76550B210FC97800F63831 /* HomePostCell.swift */; };
 		BD76550E211229A200F63831 /* Firebase utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD76550D211229A200F63831 /* Firebase utils.swift */; };
+		BD76551121122EAB00F63831 /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD76551021122EAB00F63831 /* UserSearchController.swift */; };
+		BD7655132112348400F63831 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7655122112348400F63831 /* UserSearchCell.swift */; };
 		BDCFC89E210A91C800108B35 /* PhotoSelectorcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFC89D210A91C800108B35 /* PhotoSelectorcontroller.swift */; };
 		BDCFC8A0210AA7F300108B35 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCFC89F210AA7F300108B35 /* PhotoSelectorCell.swift */; };
 		BDF6DECF21066DC8003B9B9F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */; };
@@ -51,6 +53,8 @@
 		BD765509210FC74C00F63831 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		BD76550B210FC97800F63831 /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		BD76550D211229A200F63831 /* Firebase utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase utils.swift"; sourceTree = "<group>"; };
+		BD76551021122EAB00F63831 /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
+		BD7655122112348400F63831 /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		BDCFC89D210A91C800108B35 /* PhotoSelectorcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorcontroller.swift; sourceTree = "<group>"; };
 		BDCFC89F210AA7F300108B35 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		BDF6DECE21066DC8003B9B9F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				BD765508210FC73400F63831 /* Home */,
+				BD76550F21122E7300F63831 /* Search */,
 				BDCFC89C210A90CF00108B35 /* Add Photo */,
 				BDF6DED92108D80C003B9B9F /* LogIn */,
 				BDF6DED821080A5C003B9B9F /* Model */,
@@ -138,6 +143,15 @@
 				BD76550B210FC97800F63831 /* HomePostCell.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		BD76550F21122E7300F63831 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				BD76551021122EAB00F63831 /* UserSearchController.swift */,
+				BD7655122112348400F63831 /* UserSearchCell.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		BDCFC89C210A90CF00108B35 /* Add Photo */ = {
@@ -314,12 +328,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD7655132112348400F63831 /* UserSearchCell.swift in Sources */,
 				BDCFC89E210A91C800108B35 /* PhotoSelectorcontroller.swift in Sources */,
 				BD76550C210FC97800F63831 /* HomePostCell.swift in Sources */,
 				BD09038C21038D5D009E66FA /* signUpViewController.swift in Sources */,
 				BD765505210D43CD00F63831 /* UserProfileCell.swift in Sources */,
 				BDF6DED52107FAA1003B9B9F /* UserProfileHeaderCell.swift in Sources */,
 				BD765507210F732900F63831 /* CustomImageView.swift in Sources */,
+				BD76551121122EAB00F63831 /* UserSearchController.swift in Sources */,
 				BD09038A21038D5D009E66FA /* AppDelegate.swift in Sources */,
 				BDF6DECF21066DC8003B9B9F /* MainTabBarController.swift in Sources */,
 				BD765503210D414100F63831 /* Posts.swift in Sources */,

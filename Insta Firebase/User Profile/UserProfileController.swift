@@ -21,17 +21,23 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         collectionView?.register(UserProfileHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerId")
         collectionView?.register(UserProfileCell.self, forCellWithReuseIdentifier: cellId)
         
+        collectionView?.alwaysBounceVertical = true
+        
         setUpLogOutButton()
         
         fetchUser()
-        fetchPosts()
+//        fetchPosts()
+        
     }
+    
+    var userId: String?
+        
     
     var posts = [Posts]()
     
     fileprivate func fetchPosts(){
         
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = user?.uid else{return}
         let ref = Database.database().reference().child("posts").child(uid)
         ref.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
             
@@ -128,13 +134,15 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     fileprivate func fetchUser(){
         
-        guard let uid = Auth.auth().currentUser?.uid else{return}
+        let uid = userId ?? Auth.auth().currentUser?.uid ?? ""
         
         Database.fetchUserWithUID(uid: uid) { (user) in
             
             self.user = user
             self.navigationItem.title = self.user?.username
             self.collectionView?.reloadData()
+            
+            self.fetchPosts()
 
         }
         
