@@ -8,13 +8,15 @@
 
 import UIKit
 
-struct UserDetails {
+struct Users{
     
-    let userName: String
+    let uid: String
+    let username: String
     let profileImageUrl: String
     
-    init(dictionary: [String : Any]) {
-        self.userName = dictionary["username"] as? String ?? "No username found"
+    init(uid: String, dictionary: [String : Any]) {
+        self.username = dictionary["username"] as? String ?? "No username found"
         self.profileImageUrl = dictionary["profileImageUrl"] as? String ?? "No profileImageUrl Found"
+        self.uid = uid
     }
 }
