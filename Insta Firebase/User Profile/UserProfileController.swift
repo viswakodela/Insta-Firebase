@@ -21,26 +21,55 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         collectionView?.register(UserProfileHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerId")
         collectionView?.register(UserProfileCell.self, forCellWithReuseIdentifier: cellId)
         
+        collectionView?.alwaysBounceVertical = true
+        
         setUpLogOutButton()
         
         fetchUser()
-        fetchPosts()
+//        fetchPosts()
+        
     }
+    
+    var userId: String?
+        
     
     var posts = [Posts]()
     
+    var user: Users?
+    
+    fileprivate func fetchUser(){
+        
+        let uid = userId ?? Auth.auth().currentUser?.uid ?? ""
+        
+        Database.fetchUserWithUID(uid: uid) { (user) in
+            
+            self.user = user
+            self.navigationItem.title = self.user?.username
+            self.collectionView?.reloadData()
+            
+            self.fetchPosts()
+            
+        }
+    }
+    
     fileprivate func fetchPosts(){
         
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = user?.uid else{return}
         let ref = Database.database().reference().child("posts").child(uid)
-        ref.observe(.childAdded, with: { (snapshot) in
+        ref.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
             
 //            print(snapshot.value)
             
             guard let dictionary = snapshot.value as? [String : Any] else { return }
+            
+            guard let user = self.user else {return}
             let post = Posts()
             post.imageUrl = dictionary["imageUrl"] as? String
-            self.posts.append(post)
+            post.caption = dictionary["caption"] as? String
+            post.user = user
+            
+            self.posts.insert(post, at: 0)
+//            self.posts.append(post)
             
             self.collectionView?.reloadData()
             
@@ -74,7 +103,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         present(alertController, animated: true, completion: nil)
     }
     
-    //MARKUP :- Methods for the Header of the CollectionView
+    //MARKUP :- Methods of CollectionView's Header
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -118,20 +147,16 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         return CGSize(width: width, height: width)
     }
     
-    var user: UserDetails?
+   
+        
+//        Database.database().reference().child("users").child(uid).observe(.value, with: { (snapshot) in
+//
+////            print(snapshot)
+//            guard let dictionary = snapshot.value as? [String : Any] else {return}
+//            self.user = Users(uid: uid, dictionary: dictionary)
+//
+//            self.navigationItem.title = self.user?.username
+//            self.collectionView?.reloadData()
+//        }, withCancel: nil)
     
-    fileprivate func fetchUser(){
-        
-        guard let uid = Auth.auth().currentUser?.uid else{return}
-        
-        Database.database().reference().child("users").child(uid).observe(.value, with: { (snapshot) in
-            
-            print(snapshot)
-            guard let dictionary = snapshot.value as? [String : Any] else {return}
-            self.user = UserDetails(dictionary: dictionary)
-            
-            self.navigationItem.title = "ℑ𝔫𝔰𝔱𝔞𝔤𝔯𝔞𝔪"
-            self.collectionView?.reloadData()
-        }, withCancel: nil)
-    }
 }

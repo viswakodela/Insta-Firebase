@@ -13,25 +13,14 @@ class UserProfileCell: UICollectionViewCell{
     
     var post: Posts? {
         didSet{
-            guard let imageUrl = post?.imageUrl else { return }
-            guard let url = URL(string: imageUrl) else {return}
-            URLSession.shared.dataTask(with: url) { (data, respomse, error) in
-                if error != nil {
-                    print(error ?? "")
-                }
-                guard let data = data else {return}
-                let image = UIImage(data: data)
-                
-                DispatchQueue.main.async {
-                    self.photoImageView.image = image
-                }
-            }.resume()
+            guard let imageUrl = post?.imageUrl else {return}
+            photoImageView.loadImage(urlString: imageUrl)
         }
     }
     
-    let photoImageView: UIImageView = {
+    let photoImageView: CustomImageView = {
         
-        let iv = UIImageView()
+        let iv = CustomImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true

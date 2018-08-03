@@ -36,7 +36,7 @@ class SharePhotoController: UIViewController{
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFill
+        iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         return iv
     }()
@@ -111,6 +111,8 @@ class SharePhotoController: UIViewController{
         }
     }
     
+    static let notificationUpdateFeed = NSNotification.Name(rawValue: "updateFeed")
+    
     fileprivate func saveDataIntoFirebase(imageUrl: String){
         
         guard let postImage = selectedImage else { return }
@@ -126,12 +128,11 @@ class SharePhotoController: UIViewController{
                 print(error ?? "Error Updating the values in Posts Node")
                 self.navigationItem.rightBarButtonItem?.isEnabled = false
             }
+            
+            NotificationCenter.default.post(name: SharePhotoController.notificationUpdateFeed, object: nil)
+            
         }
     }
-    
-    
-    
-    
     
     
 }
