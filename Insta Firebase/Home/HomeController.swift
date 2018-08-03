@@ -16,13 +16,34 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: SharePhotoController.notificationUpdateFeed, object: nil)
+        
         collectionView?.backgroundColor = .white
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: cellId)
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView?.refreshControl = refreshControl
+        
+        
         setUpNavigationItems()
         fetchPosts()
+        fetchFollowingUserIds()
+    }
+    
+    @objc func handleUpdateFeed(){
         
-       fetchFollowingUserIds()
+        handleRefresh()
+        
+    }
+    
+    @objc func handleRefresh() {
+        
+        posts.removeAll()
+        fetchPosts()
+        fetchFollowingUserIds()
+        collectionView?.refreshControl?.endRefreshing()
+        
     }
     
     fileprivate func fetchFollowingUserIds() {
@@ -70,8 +91,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             post.caption = dictionary["caption"] as? String
             post.user = user
             
-            guard let secondsFrom1970 = dictionary["creationDate"] as? Double else{return}
-            post.creationDate = Date(timeIntervalSince1970: secondsFrom1970)
+            guard let date = dictionary["creationDate"] as? Double else{return}
+            post.creationDate = Date(timeIntervalSinceReferenceDate: date)
             
             self.posts.insert(post, at: 0)
             

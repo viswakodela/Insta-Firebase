@@ -16,6 +16,9 @@ extension Date {
         
         let secondsAgo = Int(Date().timeIntervalSince(self))
         
+        let quotient: Int
+        let unit: String
+        
         let minute = 60
         let hour  = 60 * minute
         let day = 24 * hour
@@ -24,24 +27,36 @@ extension Date {
         let year = 12 * month
         
         if secondsAgo < minute {
-            return "\(secondsAgo) seconds ago"
+            quotient =  secondsAgo
+            unit = "second"
         }
         else if secondsAgo < hour{
-            return "\(secondsAgo / minute) minutes ago"
+            quotient =  secondsAgo / minute
+            unit = "minute"
         }
         else if secondsAgo < day {
-            return "\(secondsAgo / hour) hours ago"
+            quotient = secondsAgo / hour
+            unit = "hour"
         }
         else if secondsAgo < week {
-            return "\(secondsAgo / day) days ago"
+            quotient = secondsAgo / day
+            unit = "day"
         }
         else if secondsAgo < month {
-            return "\(secondsAgo / week) weeks ago"
+            quotient = secondsAgo / week
+            unit = "week"
         }
         else if secondsAgo < year {
-            return "\(secondsAgo / month) months ago"
+            quotient = secondsAgo / month
+            unit = "month"
         }
-        return "\(secondsAgo / year) years ago"
+        else{
+            quotient = secondsAgo / year
+            unit = "year"
+        }
+        
+        return "\(quotient) \(unit)\(quotient == 1 ? "" : "s") ago"
+        
         
     }
     
