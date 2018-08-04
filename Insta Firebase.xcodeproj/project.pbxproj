@@ -17,6 +17,7 @@
 		BD09039F2103FE9A009E66FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD09039E2103FE9A009E66FA /* GoogleService-Info.plist */; };
 		BD153E0321138F8500448823 /* Date Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD153E0221138F8500448823 /* Date Extension.swift */; };
 		BD153E052114C09300448823 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD153E042114C09300448823 /* CameraController.swift */; };
+		BD153E0821161BB900448823 /* PreviewPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD153E0721161BB900448823 /* PreviewPhotoContainerView.swift */; };
 		BD46730D210B783E00FF376A /* PhotoSelectorHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD46730C210B783E00FF376A /* PhotoSelectorHeaderCell.swift */; };
 		BD765501210CD57200F63831 /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765500210CD57200F63831 /* SharePhotoController.swift */; };
 		BD765503210D414100F63831 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD765502210D414100F63831 /* Posts.swift */; };
@@ -49,6 +50,7 @@
 		BD09039E2103FE9A009E66FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD153E0221138F8500448823 /* Date Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date Extension.swift"; sourceTree = "<group>"; };
 		BD153E042114C09300448823 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		BD153E0721161BB900448823 /* PreviewPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotoContainerView.swift; sourceTree = "<group>"; };
 		BD46730C210B783E00FF376A /* PhotoSelectorHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeaderCell.swift; sourceTree = "<group>"; };
 		BD765500210CD57200F63831 /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		BD765502210D414100F63831 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
@@ -112,7 +114,7 @@
 		BD09038821038D5D009E66FA /* Insta Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				BD153E062114C0AF00448823 /* Cameraa */,
+				BD153E062114C0AF00448823 /* Camera */,
 				BD765508210FC73400F63831 /* Home */,
 				BD76550F21122E7300F63831 /* Search */,
 				BDCFC89C210A90CF00108B35 /* Add Photo */,
@@ -142,12 +144,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		BD153E062114C0AF00448823 /* Cameraa */ = {
+		BD153E062114C0AF00448823 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
 				BD153E042114C09300448823 /* CameraController.swift */,
+				BD153E0721161BB900448823 /* PreviewPhotoContainerView.swift */,
 			);
-			path = Cameraa;
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		BD765508210FC73400F63831 /* Home */ = {
@@ -356,6 +359,7 @@
 				BD765503210D414100F63831 /* Posts.swift in Sources */,
 				BD46730D210B783E00FF376A /* PhotoSelectorHeaderCell.swift in Sources */,
 				BD153E0321138F8500448823 /* Date Extension.swift in Sources */,
+				BD153E0821161BB900448823 /* PreviewPhotoContainerView.swift in Sources */,
 				BD765501210CD57200F63831 /* SharePhotoController.swift in Sources */,
 				BD76550E211229A200F63831 /* Firebase Extension.swift in Sources */,
 				BDF6DED721080A3D003B9B9F /* Users.swift in Sources */,

@@ -19,6 +19,10 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         
     }
     
+    override var prefersStatusBarHidden: Bool{
+        return true
+    }
+    
     let captureButton: UIButton = {
         
         let button = UIButton(type: .system)
@@ -56,7 +60,6 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         dismissButtom.widthAnchor.constraint(equalToConstant: 50).isActive = true
         dismissButtom.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        
     }
     
     @objc func handleCapture() {
@@ -71,18 +74,24 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         
-        
         let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!, previewPhotoSampleBuffer: previewPhotoSampleBuffer!)
         let previewImage = UIImage(data: imageData!)
         
-        let previewImageView = UIImageView(image: previewImage)
-        previewImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(previewImageView)
+        let containerView = PreviewPhotoContainerView()
+        view.addSubview(containerView)
+        containerView.frame = view.frame
+        containerView.photoImageView.image = previewImage
         
-        previewImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        previewImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        previewImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        previewImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        let previewImageView = UIImageView(image: previewImage)
+//        previewImageView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(previewImageView)
+//
+//        previewImageView.frame = view.frame
+//
+//        previewImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        previewImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        previewImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        previewImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         
     }
@@ -92,7 +101,6 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     func setUpCaptureSession() {
         
         let captureSession = AVCaptureSession()
-        
         
         //1. - set up Input
         
