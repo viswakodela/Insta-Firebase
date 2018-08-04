@@ -25,16 +25,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView?.refreshControl = refreshControl
         
-        
         setUpNavigationItems()
         fetchPosts()
         fetchFollowingUserIds()
     }
     
     @objc func handleUpdateFeed(){
-        
         handleRefresh()
-        
     }
     
     @objc func handleRefresh() {
@@ -83,21 +80,40 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func fetchPostsWithUser(user: Users){
         
         let ref = Database.database().reference().child("posts").child(user.uid)
-        ref.observe(.childAdded) { (snap) in
-            guard let dictionary = snap.value as? [String : Any] else {return }
+        ref.observeSingleEvent(of: .value) { (snap) in
             
-            let post = Posts()
-            post.imageUrl = dictionary["imageUrl"] as? String
-            post.caption = dictionary["caption"] as? String
-            post.user = user
+//            print(snap.value)
+            guard let postDictionary = snap.value as? [String : Any] else {return}
             
-            guard let date = dictionary["creationDate"] as? Double else{return}
-            post.creationDate = Date(timeIntervalSinceReferenceDate: date)
+            postDictionary.forEach({ (key, value) in
+                guard let dictionary = value as? [String : Any] else {return}
+                
+                let post = Posts()
+                post.imageUrl = dictionary["imageUrl"] as? String
+                post.caption = dictionary["caption"] as? String
+                post.user = user
+                
+                guard let date = dictionary["creationDate"] as? Double else{return}
+                post.creationDate = Date(timeIntervalSinceReferenceDate: date)
+
+                self.posts.insert(post, at: 0)
+                
+                self.posts.sort(by: { (p1, p2) -> Bool in
+                    return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
+            })
             
-            self.posts.insert(post, at: 0)
-            
-            self.posts.sort(by: { (p1, p2) -> Bool in
-                return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
+//            let post = Posts()
+//            post.imageUrl = dictionary["imageUrl"] as? String
+//            post.caption = dictionary["caption"] as? String
+//            post.user = user
+//
+//            guard let date = dictionary["creationDate"] as? Double else{return}
+//            post.creationDate = Date(timeIntervalSinceReferenceDate: date)
+//
+//            self.posts.insert(post, at: 0)
+//
+//            self.posts.sort(by: { (p1, p2) -> Bool in
+//                return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
             })
             
             self.collectionView?.reloadData()
@@ -106,6 +122,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func setUpNavigationItems(){
         navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "logo2"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camera3").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
+    }
+    
+    @objc func handleCamera() {
+        
+        let cameraController = CameraController()
+        present(cameraController, animated: true, completion: nil)
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

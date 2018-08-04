@@ -130,7 +130,6 @@ class SharePhotoController: UIViewController{
             }
             
             NotificationCenter.default.post(name: SharePhotoController.notificationUpdateFeed, object: nil)
-            
         }
     }
     

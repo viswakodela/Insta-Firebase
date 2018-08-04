@@ -13,7 +13,6 @@ class UserSearchCell: UICollectionViewCell {
     let profileImageView: CustomImageView = {
         let iv = CustomImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.backgroundColor = .green
         iv.layer.cornerRadius = 25
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
