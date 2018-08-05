@@ -9,14 +9,26 @@
 import UIKit
 import AVFoundation
 
-class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
+class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewControllerTransitioningDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        transitioningDelegate = self
+        
         setUpCaptureSession()
         constraints()
         
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let customAnimationPresentor = CustomAnimationPresenter()
+        return customAnimationPresentor
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let customAnimatedDismisser = CustomAnimationDismisser()
+        return customAnimatedDismisser
     }
     
     override var prefersStatusBarHidden: Bool{
@@ -97,10 +109,11 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     let captureOutput = AVCapturePhotoOutput()
+    let captureSession = AVCaptureSession()
     
     func setUpCaptureSession() {
         
-        let captureSession = AVCaptureSession()
+        
         
         //1. - set up Input
         
