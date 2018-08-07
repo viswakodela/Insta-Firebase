@@ -8,7 +8,13 @@
 
 import UIKit
 
-class HomePostCell: UICollectionViewCell{
+protocol HomePostCellDelegate {
+    func didTapComment(post: Posts)
+}
+
+class HomePostCell: UICollectionViewCell {
+    
+    var delegate: HomePostCellDelegate?
     
     let PhotoImageView: CustomImageView = {
         let iv = CustomImageView()
@@ -50,12 +56,21 @@ class HomePostCell: UICollectionViewCell{
         return button
     }()
     
-    let commentButton: UIButton = {
+    lazy var commentButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "comment").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleComment), for: .touchUpInside)
         return button
     }()
+    
+    @objc func handleComment() {
+    
+        print("handling comment")
+        guard let post = self.post else {return}
+        delegate?.didTapComment(post: post)
+       
+    }
     
     let sendMessageButton: UIButton = {
         let button = UIButton(type: .system)

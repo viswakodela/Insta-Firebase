@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,6 +143,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         cell.post = posts[indexPath.item]
         
+        cell.delegate = self
+        
         return cell
     }
     
@@ -154,6 +156,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         height += 80
         
         return CGSize(width: view.frame.width, height: height)
+    }
+    
+    func didTapComment(post: Posts) {
+        
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(commentsController, animated: true)
     }
     
     
