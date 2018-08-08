@@ -10,6 +10,7 @@ import UIKit
 
 class Posts{
     
+    var postId: String?
     var user: Users?
     var imageUrl: String?
     var caption: String?

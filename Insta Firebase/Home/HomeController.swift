@@ -92,6 +92,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 post.imageUrl = dictionary["imageUrl"] as? String
                 post.caption = dictionary["caption"] as? String
                 post.user = user
+                post.postId = key
                 
                 guard let date = dictionary["creationDate"] as? Double else{return}
                 post.creationDate = Date(timeIntervalSinceReferenceDate: date)
@@ -161,6 +162,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func didTapComment(post: Posts) {
         
         let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        commentsController.postId = post.postId
         navigationController?.pushViewController(commentsController, animated: true)
     }
     
