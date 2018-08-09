@@ -94,13 +94,24 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 post.user = user
                 post.postId = key
                 
-                guard let date = dictionary["creationDate"] as? Double else{return}
-                post.creationDate = Date(timeIntervalSinceReferenceDate: date)
-
-                self.posts.insert(post, at: 0)
-                
-                self.posts.sort(by: { (p1, p2) -> Bool in
-                    return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
+                guard let uid = Auth.auth().currentUser?.uid else {return}
+                Database.database().reference().child("likes").child(key).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    if let value = snapshot.value as? Int, value == 1 {
+                        post.hasLiked = true
+                    }
+                    else {
+                        post.hasLiked = false
+                    }
+                    guard let date = dictionary["creationDate"] as? Double else{return}
+                    post.creationDate = Date(timeIntervalSinceReferenceDate: date)
+                    
+                    self.posts.insert(post, at: 0)
+                    
+                    self.posts.sort(by: { (p1, p2) -> Bool in
+                        return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
+                })
+                    self.collectionView?.reloadData()
             })
             
 //            let post = Posts()
@@ -115,9 +126,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //
 //            self.posts.sort(by: { (p1, p2) -> Bool in
 //                return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
-            })
-            
-            self.collectionView?.reloadData()
+            }) 
         }
     }
     
@@ -165,6 +174,28 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         commentsController.postId = post.postId
         navigationController?.pushViewController(commentsController, animated: true)
     }
+    
+    func didLike(for cell: HomePostCell) {
+        
+        guard let indexPath = collectionView?.indexPath(for: cell) else {return}
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let post = posts[indexPath.item]
+        
+        guard let postId = post.postId else {return}
+        
+        let values = [uid : post.hasLiked == true ? 0 : 1]
+        Database.database().reference().child("likes").child(postId).updateChildValues(values) { (error, ref) in
+            if error != nil{
+                print(error ?? "Error liking the post")
+            }
+            print("Successfully liked the post")
+            post.hasLiked = !post.hasLiked
+            self.posts[indexPath.item] = post
+            
+            self.collectionView?.reloadItems(at: [indexPath])
+        }
+    }
+
     
     
     

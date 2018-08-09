@@ -23,7 +23,7 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.keyboardDismissMode = .interactive
         
         collectionView?.register(CommentCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
+        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 350, right: 0)
 //        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
         commentsTextField.delegate = self
         

@@ -16,4 +16,6 @@ class Posts{
     var caption: String?
     var creationDate: Date?
     
+    var hasLiked: Bool = false
+    
 }
