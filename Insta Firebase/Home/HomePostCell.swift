@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol HomePostCellDelegate {
+protocol HomePostCellDelegate: class {
     func didTapComment(post: Posts)
     func didLike(for cell: HomePostCell)
 }
 
 class HomePostCell: UICollectionViewCell {
     
-    var delegate: HomePostCellDelegate?
+    weak var delegate: HomePostCellDelegate?
     
     let PhotoImageView: CustomImageView = {
         let iv = CustomImageView()

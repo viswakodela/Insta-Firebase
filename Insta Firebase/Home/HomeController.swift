@@ -163,7 +163,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         var height: CGFloat = 40 + 8 + 8
         height = height + view.frame.width
         height += 50
-        height += 80
+        height += 60
         
         return CGSize(width: view.frame.width, height: height)
     }
@@ -190,7 +190,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             }
             print("Successfully liked the post")
             post.hasLiked = !post.hasLiked
-            self.posts[indexPath.item] = post
+//            self.posts[indexPath.item] = post
             
             self.collectionView?.reloadItems(at: [indexPath])
         }

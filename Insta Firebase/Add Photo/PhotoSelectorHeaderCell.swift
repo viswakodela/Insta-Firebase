@@ -14,7 +14,8 @@ class PhotoSelectorHeaderCell: UICollectionViewCell{
         
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleToFill
+        iv.clipsToBounds = true
         return iv
     }()
     

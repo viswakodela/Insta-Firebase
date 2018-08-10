@@ -10,7 +10,14 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
+protocol UserProfileHeaderDelegate {
+    func didChangeToListView()
+    func didChangeToGridView()
+}
+
 class UserProfileHeaderCell: UICollectionViewCell{
+    
+    var delegate: UserProfileHeaderDelegate?
     
     let profileImageView: CustomImageView = {
         let iv = CustomImageView()
@@ -29,19 +36,39 @@ class UserProfileHeaderCell: UICollectionViewCell{
         return label
     }()
     
-    let gridButton: UIButton = {
+    lazy var gridButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "grid"), for: .normal)
 //        button.tintColor = UIColor(white: 0, alpha: 0.2)
+        button.addTarget(self, action: #selector(handleChnageGridView), for: .touchUpInside)
         return button
     }()
     
-    let listButton: UIButton = {
+    @objc func handleChnageGridView() {
+        
+        print("Chnaging to grid View")
+        listButton.tintColor = UIColor.rgb(red: 230, green: 230, blue: 230)
+        gridButton.tintColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+        delegate?.didChangeToGridView()
+        
+    }
+    
+    lazy var listButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "list"), for: .normal)
         button.tintColor = UIColor(white: 0, alpha: 0.2)
+        button.addTarget(self, action: #selector(handleChangeToListView), for: .touchUpInside)
         return button
     }()
+    
+    @objc func handleChangeToListView() {
+        
+        print("Changing to List View")
+        listButton.tintColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+        gridButton.tintColor = UIColor.rgb(red: 230, green: 230, blue: 230)
+        delegate?.didChangeToListView()
+        
+    }
     
     let bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
@@ -52,13 +79,6 @@ class UserProfileHeaderCell: UICollectionViewCell{
     
     let postsLabel: UILabel = {
         let label = UILabel()
-        
-        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
-        
-        attributedText.append(NSAttributedString(string: "posts", attributes: [ kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
-        
-        
-        label.attributedText = attributedText
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -67,12 +87,6 @@ class UserProfileHeaderCell: UICollectionViewCell{
     
     let followersLabel: UILabel = {
         let label = UILabel()
-        
-        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
-        
-        attributedText.append(NSAttributedString(string: "followers", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
-        label.attributedText = attributedText
-        
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -81,12 +95,6 @@ class UserProfileHeaderCell: UICollectionViewCell{
     
     let followingLabel: UILabel = {
         let label = UILabel()
-        
-        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
-        
-        attributedText.append(NSAttributedString(string: "following", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
-            label.attributedText = attributedText
-            
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -112,8 +120,40 @@ class UserProfileHeaderCell: UICollectionViewCell{
             self.userNameLabel.text = self.user?.username
             guard let urlString = user?.profileImageUrl else {return}
             profileImageView.loadImage(urlString: urlString)
+            guard let uid = user?.uid else {return}
             
+            postsFollowersFollowingLabelSetUp(uid: uid)
             setEditFollowButton()
+        }
+    }
+    
+    func postsFollowersFollowingLabelSetUp(uid: String) {
+        
+        
+        Database.database().reference().child("posts").child(uid).observe(.value) { (snap) in
+            let numberOfPosts = snap.childrenCount
+            //                print(snap.childrenCount)
+            
+            let postLabelAttributedText = NSMutableAttributedString(string: String(numberOfPosts)+"\n", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
+            
+            postLabelAttributedText.append(NSAttributedString(string: "posts", attributes: [ kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
+            
+            Database.database().reference().child("following").child(uid).observe(.value, with: { (snapshot) in
+                let followingattributedText = NSMutableAttributedString(string: String(snapshot.childrenCount)+"\n" , attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
+                
+                followingattributedText.append(NSAttributedString(string: "following", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
+                
+                self.followingLabel.attributedText = followingattributedText
+            })
+            
+            Database.database().reference().child("followers").child(uid).observe(.value, with: { (snapshot) in
+                let attributedText = NSMutableAttributedString(string: String(snapshot.childrenCount)+"\n", attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14)])
+                
+                attributedText.append(NSAttributedString(string: "followers", attributes: [  kCTForegroundColorAttributeName as NSAttributedStringKey: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray]))
+                self.followersLabel.attributedText = attributedText
+            })
+            
+            self.postsLabel.attributedText = postLabelAttributedText
         }
     }
     
@@ -123,7 +163,9 @@ class UserProfileHeaderCell: UICollectionViewCell{
         guard let userId = user?.uid else {return}
         
         if currentLoggedInUser == userId{
+            
             editProfileFollowButton.setTitle("Edit profile", for: .normal)
+            
         }else{
         Database.database().reference().child("following").child(currentLoggedInUser).child(userId).observe(.value) { (snap) in
                 
@@ -145,6 +187,8 @@ class UserProfileHeaderCell: UICollectionViewCell{
         }
     }
     
+   
+    
     @objc func handleEditProfileFollowButton(){
         
         guard let currentLoggedInUser = Auth.auth().currentUser?.uid else{return}
@@ -159,15 +203,35 @@ class UserProfileHeaderCell: UICollectionViewCell{
                 }
                 print("Unfollowing the user Successfully")
             }
+            Database.database().reference().child("followers").child(userId).child(currentLoggedInUser).removeValue { (error, ref) in
+                if error != nil {
+                    print(error ?? "Error")
+                }
+            }
             
         }else{
             
-            // Follow
+            //MARK:- Following Node
             let followingReference = Database.database().reference().child("following").child(currentLoggedInUser)
             
-            let values = [userId: 1]
             
-            followingReference.updateChildValues(values) { (error, ref) in
+            
+            //MARK:- Follwers Node
+            let followersReference = Database.database().reference().child("followers").child(userId)
+            let followersvalues = [currentLoggedInUser : 1]
+            followersReference.updateChildValues(followersvalues) { (error, ref) in
+                if error != nil {
+                    print(error ?? "Error Followinmg the user")
+                }
+            }
+            
+            
+            
+            
+            //MARK:- Follwing Node Continues
+            let followingvalues = [userId: 1]
+            
+            followingReference.updateChildValues(followingvalues) { (error, ref) in
                 if error != nil {
                     print(error ?? "Error following the user")
                 }
@@ -175,6 +239,7 @@ class UserProfileHeaderCell: UICollectionViewCell{
             }
         }
     }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
