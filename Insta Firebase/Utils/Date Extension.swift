@@ -28,7 +28,7 @@ extension Date {
         
         if secondsAgo < minute {
             quotient =  secondsAgo
-            unit = "second"
+            unit = "seconds"
         }
         else if secondsAgo < hour{
             quotient =  secondsAgo / minute

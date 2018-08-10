@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 
+
 class PhotoSelectorcontroller: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let cellId = "cellId"
@@ -56,7 +57,7 @@ class PhotoSelectorcontroller: UICollectionViewController, UICollectionViewDeleg
                                 self.assests.append(asset)
                                 
                                 if self.seletcedImage == nil {
-                                    self.seletcedImage = image
+                                    self.seletcedImage = self.images.first
                                 }
                             }
                             if count == allPhotos.count - 1{

@@ -10,9 +10,12 @@ import UIKit
 
 class Posts{
     
+    var postId: String?
     var user: Users?
     var imageUrl: String?
     var caption: String?
     var creationDate: Date?
+    
+    var hasLiked: Bool = false
     
 }

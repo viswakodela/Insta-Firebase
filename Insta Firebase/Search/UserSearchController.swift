@@ -141,6 +141,7 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         
         let selectedUser = filteredUsers[indexPath.item].uid
         
+        
         let selectedUserProfile = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
         selectedUserProfile.userId = selectedUser
         navigationController?.pushViewController(selectedUserProfile, animated: true)

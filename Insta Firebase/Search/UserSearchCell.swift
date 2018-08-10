@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class UserSearchCell: UICollectionViewCell {
     
     let profileImageView: CustomImageView = {
         let iv = CustomImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.backgroundColor = .green
         iv.layer.cornerRadius = 25
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -44,9 +45,13 @@ class UserSearchCell: UICollectionViewCell {
             
             let attributedText = NSMutableAttributedString(string: user.username, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
             
-            attributedText.append(NSMutableAttributedString(string: "\n2 posts", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor.gray]))
+            Database.database().reference().child("posts").child(user.uid).observe(.value) { (snapshot) in
+                attributedText.append(NSMutableAttributedString(string: "\n"+String(snapshot.childrenCount)+" posts", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor.gray]))
+                
+                self.usernameLabel.attributedText = attributedText
+            }
             
-            usernameLabel.attributedText = attributedText
+            
             
         }
     }

@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,16 +25,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView?.refreshControl = refreshControl
         
-        
         setUpNavigationItems()
         fetchPosts()
         fetchFollowingUserIds()
     }
     
     @objc func handleUpdateFeed(){
-        
         handleRefresh()
-        
     }
     
     @objc func handleRefresh() {
@@ -83,29 +80,66 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func fetchPostsWithUser(user: Users){
         
         let ref = Database.database().reference().child("posts").child(user.uid)
-        ref.observe(.childAdded) { (snap) in
-            guard let dictionary = snap.value as? [String : Any] else {return }
+        ref.observeSingleEvent(of: .value) { (snap) in
             
-            let post = Posts()
-            post.imageUrl = dictionary["imageUrl"] as? String
-            post.caption = dictionary["caption"] as? String
-            post.user = user
+//            print(snap.value)
+            guard let postDictionary = snap.value as? [String : Any] else {return}
             
-            guard let date = dictionary["creationDate"] as? Double else{return}
-            post.creationDate = Date(timeIntervalSinceReferenceDate: date)
-            
-            self.posts.insert(post, at: 0)
-            
-            self.posts.sort(by: { (p1, p2) -> Bool in
-                return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
+            postDictionary.forEach({ (key, value) in
+                guard let dictionary = value as? [String : Any] else {return}
+                
+                let post = Posts()
+                post.imageUrl = dictionary["imageUrl"] as? String
+                post.caption = dictionary["caption"] as? String
+                post.user = user
+                post.postId = key
+                
+                guard let uid = Auth.auth().currentUser?.uid else {return}
+                Database.database().reference().child("likes").child(key).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    if let value = snapshot.value as? Int, value == 1 {
+                        post.hasLiked = true
+                    }
+                    else {
+                        post.hasLiked = false
+                    }
+                    guard let date = dictionary["creationDate"] as? Double else{return}
+                    post.creationDate = Date(timeIntervalSinceReferenceDate: date)
+                    
+                    self.posts.insert(post, at: 0)
+                    
+                    self.posts.sort(by: { (p1, p2) -> Bool in
+                        return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
+                })
+                    self.collectionView?.reloadData()
             })
             
-            self.collectionView?.reloadData()
+//            let post = Posts()
+//            post.imageUrl = dictionary["imageUrl"] as? String
+//            post.caption = dictionary["caption"] as? String
+//            post.user = user
+//
+//            guard let date = dictionary["creationDate"] as? Double else{return}
+//            post.creationDate = Date(timeIntervalSinceReferenceDate: date)
+//
+//            self.posts.insert(post, at: 0)
+//
+//            self.posts.sort(by: { (p1, p2) -> Bool in
+//                return p1.creationDate?.compare(p2.creationDate!) == .orderedDescending
+            }) 
         }
     }
     
     fileprivate func setUpNavigationItems(){
         navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "logo2"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camera3").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
+    }
+    
+    @objc func handleCamera() {
+        
+        let cameraController = CameraController()
+        present(cameraController, animated: true, completion: nil)
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -119,6 +153,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         cell.post = posts[indexPath.item]
         
+        cell.delegate = self
+        
         return cell
     }
     
@@ -127,10 +163,39 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         var height: CGFloat = 40 + 8 + 8
         height = height + view.frame.width
         height += 50
-        height += 80
+        height += 60
         
         return CGSize(width: view.frame.width, height: height)
     }
+    
+    func didTapComment(post: Posts) {
+        
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        commentsController.postId = post.postId
+        navigationController?.pushViewController(commentsController, animated: true)
+    }
+    
+    func didLike(for cell: HomePostCell) {
+        
+        guard let indexPath = collectionView?.indexPath(for: cell) else {return}
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let post = posts[indexPath.item]
+        
+        guard let postId = post.postId else {return}
+        
+        let values = [uid : post.hasLiked == true ? 0 : 1]
+        Database.database().reference().child("likes").child(postId).updateChildValues(values) { (error, ref) in
+            if error != nil{
+                print(error ?? "Error liking the post")
+            }
+            print("Successfully liked the post")
+            post.hasLiked = !post.hasLiked
+//            self.posts[indexPath.item] = post
+            
+            self.collectionView?.reloadItems(at: [indexPath])
+        }
+    }
+
     
     
     
