@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseMessaging
 
 class signUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -211,8 +212,9 @@ class signUpViewController: UIViewController, UIImagePickerControllerDelegate, U
                     }
                     
                     guard let profileImageUrl = url?.absoluteString else {return}
+                    guard let fcmToken = Messaging.messaging().fcmToken else {return}
                    
-                    let values: [String : AnyObject] = ["username": userName, "email": email, "profileImageUrl": profileImageUrl] as [String : AnyObject]
+                    let values: [String : AnyObject] = ["username": userName, "email": email, "profileImageUrl": profileImageUrl, "fcmToken": fcmToken] as [String : AnyObject]
                     
                     if let uid = result?.user.uid{
                         let usersRef = Database.database().reference().child("users").child(uid)

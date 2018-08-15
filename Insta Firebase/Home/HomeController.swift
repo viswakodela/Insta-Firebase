@@ -47,7 +47,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         guard let currentUserId = Auth.auth().currentUser?.uid else{return}
         Database.database().reference().child("following").child(currentUserId).observe(.childAdded) { (snapshot) in
-            
+           
             let uid = snapshot.key
 //            guard let userIdsDictionary = snapshot.value as? [String : Any] else {return}
             
@@ -150,6 +150,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! HomePostCell
+        
+
+        
+        if posts.count == 0 {
+            print("No posts available")
+            self.collectionView?.reloadData()
+            return cell
+        }
         
         cell.post = posts[indexPath.item]
         

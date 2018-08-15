@@ -17,11 +17,10 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let index = viewControllers?.index(of: viewController)
         if index == 2{
-            let photSelectorController = PhotoSelectorcontroller(collectionViewLayout: UICollectionViewFlowLayout())
-            let photoSelectNavController = UINavigationController(rootViewController: photSelectorController)
+            let photoSelectorController = PhotoSelectorcontroller(collectionViewLayout: UICollectionViewFlowLayout())
+            let photoSelectNavController = UINavigationController(rootViewController: photoSelectorController)
             present(photoSelectNavController, animated: true, completion: nil)
             return false
-            
         }
         return true
     }
@@ -42,7 +41,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             }
             return
         }
-        
        setUpControllers()
     }
     

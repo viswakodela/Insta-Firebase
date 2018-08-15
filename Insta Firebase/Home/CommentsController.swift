@@ -24,8 +24,8 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         
         collectionView?.register(CommentCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
-//        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
-        commentsTextField.delegate = self
+//        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: -50, right: 0)
+
         
         fetchComments()
         
@@ -72,14 +72,12 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
-    override var canBecomeFirstResponder: Bool{
-        return true
-    }
-    
     lazy var containerView: UIView = {
         
         let containerView = UIView()
         containerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        containerView.backgroundColor = .gray
+        
         
         let submitButton = UIButton(type: .system)
         submitButton.translatesAutoresizingMaskIntoConstraints = false
@@ -87,25 +85,25 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         submitButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         submitButton.setTitleColor(.black, for: .normal)
         submitButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
-        
+
         let seperaterLine = UIView()
         seperaterLine.backgroundColor = UIColor.lightGray
         seperaterLine.translatesAutoresizingMaskIntoConstraints = false
-        
+
         containerView.addSubview(commentsTextField)
         containerView.addSubview(submitButton)
         containerView.addSubview(seperaterLine)
-        
+
         submitButton.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         submitButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         submitButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         submitButton.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -12).isActive = true
-        
+
         commentsTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        commentsTextField.rightAnchor.constraint(equalTo: submitButton.leftAnchor).isActive = true
+        commentsTextField.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
         commentsTextField.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         commentsTextField.heightAnchor.constraint(equalToConstant: 49).isActive = true
-        
+
         seperaterLine.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         seperaterLine.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
         seperaterLine.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
@@ -115,13 +113,22 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         
     }()
     
-    let commentsTextField: UITextField = {
+    override var canBecomeFirstResponder: Bool{
+        return true
+    }
+    
+    lazy var commentsTextField: UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.backgroundColor = .white
         tf.placeholder = "Type your comment..."
         return tf
     }()
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        handleSend()
+//        return true
+//    }
     
     var postId: String?
     
@@ -140,16 +147,10 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
             if error != nil {
                 print(error ?? "Error updating the comment")
             }
-            self.commentsTextField.text = ""
+            self.commentsTextField.text = nil
 
             print("Succesfully inserted the comment")
-        } 
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        handleSend()
-        commentsTextField.resignFirstResponder()
-        return true
+        }
     }
 }
 

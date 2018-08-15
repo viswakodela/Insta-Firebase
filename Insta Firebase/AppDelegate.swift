@@ -8,9 +8,11 @@
 
 import UIKit
 import Firebase
+import UserNotifications
+import FirebaseMessaging
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -20,7 +22,81 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         window = UIWindow()
         window?.rootViewController = MainTabBarController()
+        
+        attemptRegisterForNotifications(application: application)
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        print(deviceToken)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error)
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Registered with FCM Token", fcmToken)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        if let followerId = userInfo["followerId"] as? String {
+            print(followerId)
+            
+            //Wer have to push the UserProfileController with the followerId
+                let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+                userProfileController.userId = followerId
+            
+            //How do we access our Main UI from AppDelegate ?
+            if let mainTabBarController = window?.rootViewController as? MainTabBarController {
+                
+                mainTabBarController.selectedIndex = 0
+                
+                mainTabBarController.presentedViewController?.dismiss(animated: true, completion: nil)
+                
+                if let homeNavigationController = mainTabBarController.viewControllers?.first as? UINavigationController {
+                    
+                    homeNavigationController.pushViewController(userProfileController, animated: true)
+                    
+                }
+            }
+        }
+    }
+    
+    //Listen for user Notifications
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert)
+    }
+    
+    private func attemptRegisterForNotifications(application: UIApplication) {
+        
+        print("Attempt to register for APNS..")
+        
+        Messaging.messaging().delegate = self
+        
+        UNUserNotificationCenter.current().delegate = self
+        
+        //We have to perform user notification Authorization
+        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: options) { (granted, error) in
+                if let error = error{
+                    print("Failed to request Authorization:", error)
+                }
+                if granted{
+                    print("Auth Granted")
+                }
+                else{
+                    print("Auth Denied")
+                }
+        }
+        
+        application.registerForRemoteNotifications()
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
